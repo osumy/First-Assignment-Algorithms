@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Exercises2 {
 
@@ -55,10 +52,14 @@ public class Exercises2 {
         int sum = 0;
         String[] romanChars = {"IV", "IX", "XL", "XC", "CD", "CM", "I", "V", "X", "L", "C", "D", "M"};
         int[] romanCharValues = {4, 9, 40, 90, 400, 900, 1, 5, 10, 50, 100, 500, 1000};
-        for (int i = 0; i < 13; i++){
-            while (s.contains(romanChars[i])){
-                sum += romanCharValues[i];
-                s = s.replaceFirst(romanChars[i], "");
+        Map<String, Integer> romanToIntDict = new LinkedHashMap<String, Integer>();
+        for (int i = 0; i < 13; i++)
+            romanToIntDict.put(romanChars[i], romanCharValues[i]);
+
+        for (Map.Entry mapElement : romanToIntDict.entrySet()) {
+            while (s.contains((String)mapElement.getKey())) {
+                sum += (int)mapElement.getValue();
+                s = s.replaceFirst((String)mapElement.getKey(), "");
             }
         }
         return sum;
@@ -73,7 +74,5 @@ public class Exercises2 {
         return null;
     }
 
-    public static void main(String[] args) {
-        // test your code here!
-    }
+    public static void main(String[] args) {}
 }
