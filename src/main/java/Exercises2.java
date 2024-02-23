@@ -12,7 +12,6 @@ public class Exercises2 {
     You may assume that each input would have exactly one solution, and you may not use the same element twice.
     You can return the answer in any order.
     */
-
     public int[] twoSum(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++){
             for (int j = i+1; j < nums.length; j++){
@@ -52,17 +51,23 @@ public class Exercises2 {
 
     Given a roman numeral, convert it to an integer.
     */
-
     public int romanToInt(String s) {
-        // TODO
-        return 0;
+        int sum = 0;
+        String[] romanChars = {"IV", "IX", "XL", "XC", "CD", "CM", "I", "V", "X", "L", "C", "D", "M"};
+        int[] romanCharValues = {4, 9, 40, 90, 400, 900, 1, 5, 10, 50, 100, 500, 1000};
+        for (int i = 0; i < 13; i++){
+            while (s.contains(romanChars[i])){
+                sum += romanCharValues[i];
+                s = s.replaceFirst(romanChars[i], "");
+            }
+        }
+        return sum;
     }
 
     /*
     Given an array nums of distinct integers, return all the possible permutations.
     You can return the answer in any order.
     */
-
     public List<List<Integer>> permute(int[] nums) {
         // TODO
         return null;
