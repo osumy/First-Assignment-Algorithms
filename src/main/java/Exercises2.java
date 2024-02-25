@@ -49,7 +49,8 @@ public class Exercises2 {
     Given a roman numeral, convert it to an integer.
     */
     public int romanToInt(String s) {
-        int sum = 0;
+        int sum = 0; // the integer
+        // defining the values of roman characters
         String[] romanChars = {"IV", "IX", "XL", "XC", "CD", "CM", "I", "V", "X", "L", "C", "D", "M"};
         int[] romanCharValues = {4, 9, 40, 90, 400, 900, 1, 5, 10, 50, 100, 500, 1000};
         Map<String, Integer> romanToIntDict = new LinkedHashMap<String, Integer>();
@@ -69,9 +70,52 @@ public class Exercises2 {
     Given an array nums of distinct integers, return all the possible permutations.
     You can return the answer in any order.
     */
-    public List<List<Integer>> permute(int[] nums) {
-        // TODO
-        return null;
+    public static void recurPer(List<List<Integer>> ls, List<Integer> tmp, List<Integer> remaining, int size){
+        // add a permutations to list
+        if (tmp.size() == size)
+            ls.add(tmp);
+
+        else {
+            for (int i = 0; i < remaining.size(); i++) {
+                // adding all elements of tmp to tmp2
+                List<Integer> tmp2 = new ArrayList<>();
+                for (Integer I : tmp){
+                    tmp2.add(I);
+                }
+                // adding a number to tmp2
+                tmp2.add(remaining.get(i));
+
+                // adding all elements of remaining to remaining2
+                List<Integer> remaining2 = new ArrayList<>();
+                for (Integer I : remaining){
+                    remaining2.add(I);
+                }
+                // removing the number
+                remaining2.remove(i);
+
+                recurPer(ls, tmp2, remaining2, size);
+            }
+        }
+    }
+
+    public static List<List<Integer>> permute(int[] nums) {
+        // to save all permutations
+        List<List<Integer>> ls = new ArrayList<>();
+
+        // current permutation
+        List<Integer> tmp = new ArrayList<>();
+
+        // putting all numbers to a list
+        List<Integer> remaining =  new ArrayList<>();
+        for (int num : nums) {
+            remaining.add(num);
+        }
+
+        // a recursive method to find all permutations and put them
+        // to the ls
+        recurPer(ls, tmp, remaining, nums.length);
+
+        return ls;
     }
 
     public static void main(String[] args) {}
